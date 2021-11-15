@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "mlpipes"
+version = "0.1.0"
+description = ""
+authors = ["jbencook <ben@sparrow.dev>"]
+license = "MIT"
+packages = [
+    { include = "mlpipes" }
+]
+
+[tool.poetry.dependencies]
+python = ">= 3.6, <3.11"
+fire = "^0.4.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.4b2"
+dvc = {extras = ["s3"], version = "^2.8.3"}
+awscli = "^1.19.106"
+jupyter = "^1.0.0"
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
