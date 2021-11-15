@@ -18,6 +18,7 @@
 	"mounts": [
 		"source={{ remote_home_directory }}/.ssh,target=/root/.ssh,type=bind,consistency=cached,readonly",
 		"source={{ remote_home_directory }}/.aws,target=/root/.aws,type=bind,consistency=cached,readonly",
+		"source={{ remote_home_directory }}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached,readonly",
 		"source=projectname-bashhistory,target=/commandhistory,type=volume"
 	],
 	"workspaceMount": "source={{ remote_project_directory }},target=/code,type=bind",
