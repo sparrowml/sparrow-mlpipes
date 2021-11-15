@@ -11,6 +11,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">= 3.8, <3.11"
 fire = "^0.4.0"
+numpy = "^1.21.4"
 
 [tool.poetry.dev-dependencies]
 black = "^21.4b2"
@@ -18,6 +19,9 @@ dvc = {extras = ["s3"], version = "^2.8.3"}
 awscli = "^1.19.106"
 jupyter = "^1.0.0"
 pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.6.1"
+mypy = "^0.910"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
