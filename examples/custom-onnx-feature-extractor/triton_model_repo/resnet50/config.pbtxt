@@ -1,0 +1,25 @@
+name: "resnet50"
+platform: "onnxruntime_onnx"
+max_batch_size: 0
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    format: FORMAT_NCHW
+    dims: [ 3, 512, 512 ]
+  }
+]
+output [
+  {
+    name: "res4"
+    data_type: TYPE_FP32
+    dims: [ 1024, 32, 32 ]
+  }
+]
+
+# Specify GPU instance.
+instance_group {
+  kind: KIND_GPU
+  count: 1
+  gpus: 0
+}
