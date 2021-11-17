@@ -11,9 +11,14 @@ input [
 ]
 output [
   {
-    name: "p4"
+    name: "boxes"
     data_type: TYPE_FP32
-    dims: [ 256, 32, 32 ]
+    dims: [ 49104, 4 ]
+  },
+  {
+    name: "scores"
+    data_type: TYPE_FP32
+    dims: [ 49104, 80 ]
   }
 ]
 

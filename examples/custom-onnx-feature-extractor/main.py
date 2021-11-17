@@ -29,8 +29,15 @@ def print_objects_pad(_, info, __):
             ptr = ctypes.cast(
                 pyds.get_ptr(layer.buffer), ctypes.POINTER(ctypes.c_float)
             )
-            features = np.ctypeslib.as_array(ptr, shape=(256, 32, 32))
-            print(frame_number, features.mean(), features.std())
+            boxes = np.ctypeslib.as_array(ptr, shape=(49104, 4))
+            layer = pyds.get_nvds_LayerInfo(tensor_meta, 1)
+            ptr = ctypes.cast(
+                pyds.get_ptr(layer.buffer), ctypes.POINTER(ctypes.c_float)
+            )
+            scores = np.ctypeslib.as_array(ptr, shape=(49104, 80))
+            max_classes = scores.max(1)
+            best_box_idx = max_classes.argmax()
+            print(frame_number, boxes[best_box_idx], max_classes[best_box_idx])
 
     return mlp.Gst.PadProbeReturn.OK
 
