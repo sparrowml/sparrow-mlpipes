@@ -11,9 +11,9 @@ input [
 ]
 output [
   {
-    name: "res4"
+    name: "p4"
     data_type: TYPE_FP32
-    dims: [ 1024, 32, 32 ]
+    dims: [ 256, 32, 32 ]
   }
 ]
 

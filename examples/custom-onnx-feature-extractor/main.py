@@ -29,7 +29,7 @@ def print_objects_pad(_, info, __):
             ptr = ctypes.cast(
                 pyds.get_ptr(layer.buffer), ctypes.POINTER(ctypes.c_float)
             )
-            features = np.ctypeslib.as_array(ptr, shape=(1024, 32, 32))
+            features = np.ctypeslib.as_array(ptr, shape=(256, 32, 32))
             print(frame_number, features.mean(), features.std())
 
     return mlp.Gst.PadProbeReturn.OK

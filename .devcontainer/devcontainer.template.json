@@ -1,5 +1,5 @@
 {
-	"name": "retinanet",
+	"name": "mlpipes",
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},
