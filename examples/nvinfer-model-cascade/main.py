@@ -1,6 +1,6 @@
 import fire
+
 import mlpipes as mlp
-import pyds
 
 PGIE_CLASS_ID_VEHICLE = 0
 PGIE_CLASS_ID_BICYCLE = 1
@@ -13,7 +13,6 @@ FPS = 30
 
 
 def print_objects_pad(_, info, __):
-    frame_number = 0
     # Intiallizing object counter with 0.
     obj_counter = {
         PGIE_CLASS_ID_VEHICLE: 0,
@@ -21,20 +20,13 @@ def print_objects_pad(_, info, __):
         PGIE_CLASS_ID_BICYCLE: 0,
         PGIE_CLASS_ID_ROADSIGN: 0,
     }
-    num_rects = 0
-
-    gst_buffer = info.get_buffer()
-    if not gst_buffer:
-        print("Unable to get GstBuffer ")
-        return
-
-    batch_meta = pyds.gst_buffer_get_nvds_batch_meta(hash(gst_buffer))
+    batch_meta = mlp.get_batch_meta(info)
     for frame in mlp.pyds_generator(batch_meta.frame_meta_list):
-        frame_meta = pyds.NvDsFrameMeta.cast(frame.data)
+        frame_meta = mlp.get_frame_meta(frame)
         frame_number = frame_meta.frame_num
         num_rects = frame_meta.num_obj_meta
         for obj in mlp.pyds_generator(frame_meta.obj_meta_list):
-            obj_meta = pyds.NvDsObjectMeta.cast(obj.data)
+            obj_meta = mlp.get_object_meta(obj)
             obj_counter[obj_meta.class_id] += 1
             obj_meta.rect_params.border_color.set(0.0, 0.0, 1.0, 0.0)
         message = (

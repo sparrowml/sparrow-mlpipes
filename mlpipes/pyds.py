@@ -19,6 +19,10 @@ def get_user_meta(user: pyds.GList) -> pyds.NvDsUserMeta:
     return pyds.NvDsUserMeta.cast(user.data)
 
 
+def get_object_meta(obj: pyds.GList) -> pyds.NvDsObjectMeta:
+    return pyds.NvDsObjectMeta.cast(obj.data)
+
+
 def get_output_tensor(
     user_meta: pyds.NvDsUserMeta,
     layer_index: int,
