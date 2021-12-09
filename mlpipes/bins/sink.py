@@ -33,6 +33,6 @@ def make_sink_bin(output_path: str) -> Gst.Bin:
     Gst.Bin.add(bin, sink)
     qtmux.link(sink)
 
-    bin.add_pad(Gst.GhostPad("sink", nvvideoconvert2.get_static_pad("sink")))
+    bin.add_pad(Gst.GhostPad("sink", nvvideoconvert.get_static_pad("sink")))
 
     return bin

@@ -48,20 +48,30 @@ def print_objects_pad(_, info, __):
     return mlp.Gst.PadProbeReturn.OK
 
 
-def main(video_path: str, config_path: str = "./nvinfer.config"):
-    pipeline = mlp.Pipeline()
-    pipeline.add_block(mlp.blocks.source_block(video_path))
-    pipeline.add_block(
-        mlp.blocks.inference_block(
-            config_path,
-            width=WIDTH,
-            height=HEIGHT,
-            fps=FPS,
-            inference_probe=print_objects_pad,
-        )
+def main(video_path: str, config_path: str = "./nvinfer.config", output_path: str = "./out.mp4"):
+    pipeline = mlp.Gst.Pipeline()
+    source_bin = mlp.make_source_bin(video_path)
+    pipeline.add(source_bin)
+
+    inference_bin = mlp.make_nvinfer_bin(
+        config_path,
+        width=WIDTH,
+        height=HEIGHT,
+        fps=FPS,
+        inference_probe=print_objects_pad,
     )
-    pipeline.add(mlp.Element("fakesink"))
-    pipeline.run()
+    pipeline.add(inference_bin)
+    source_bin.link(inference_bin)
+
+    visualization_bin = mlp.make_visualization_bin()
+    pipeline.add(visualization_bin)
+    inference_bin.link(visualization_bin)
+
+    sink_bin = mlp.make_sink_bin(output_path)
+    pipeline.add(sink_bin)
+    visualization_bin.link(sink_bin)
+
+    mlp.run_pipeline(pipeline)
 
 
 if __name__ == "__main__":
