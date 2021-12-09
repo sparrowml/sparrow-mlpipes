@@ -18,9 +18,7 @@ def make_visualization_bin(
     Gst.Bin.add(bin, nvdsosd)
     nvvideoconvert.link(nvdsosd)
     if osd_probe:
-        nvdsosd.get_static_pad("sink").add_probe(
-            Gst.PadProbeType.BUFFER, osd_probe, 0
-        )
+        nvdsosd.get_static_pad("sink").add_probe(Gst.PadProbeType.BUFFER, osd_probe, 0)
 
     queue = make_element("queue")
     Gst.Bin.add(bin, queue)

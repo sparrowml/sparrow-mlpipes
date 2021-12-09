@@ -1,5 +1,3 @@
-from typing import Any, Callable, Optional, Tuple
-
 from mlpipes.initialize import Gst
 from mlpipes.element import make_element
 

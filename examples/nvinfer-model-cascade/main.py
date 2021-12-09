@@ -40,7 +40,11 @@ def print_objects_pad(_, info, __):
     return mlp.Gst.PadProbeReturn.OK
 
 
-def main(video_path: str, config_path: str = "./nvinfer.config", output_path: str = "./out.mp4"):
+def main(
+    video_path: str,
+    config_path: str = "./nvinfer.config",
+    output_path: str = "./out.mp4",
+) -> None:
     pipeline = mlp.Gst.Pipeline()
     source_bin = mlp.make_source_bin(video_path)
     pipeline.add(source_bin)
