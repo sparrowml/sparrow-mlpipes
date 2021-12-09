@@ -3,7 +3,7 @@ from typing import List
 import numpy as np
 
 
-def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> List[int]:
+def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> np.ndarray:
     """
     Remove overlapping boxes with non-max suppression.
 
@@ -18,8 +18,8 @@ def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> List[int
 
     Returns
     -------
-    keep
-        A list of indices indicating which boxes to keep
+    keep_boxes
+        A set of boxes to keep
     """
     x1 = boxes[:, 0]
     y1 = boxes[:, 1]
@@ -46,4 +46,4 @@ def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> List[int
         inds = np.where(ovr <= iou_threshold)[0]
         order = order[inds + 1]
 
-    return keep
+    return np.array(keep).astype(int)
