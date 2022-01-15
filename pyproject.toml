@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mlpipes"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["jbencook <ben@sparrow.dev>"]
 license = "MIT"

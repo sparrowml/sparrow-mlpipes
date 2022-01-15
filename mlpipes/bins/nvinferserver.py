@@ -9,6 +9,7 @@ def make_nvinferserver_bin(
     width: int,
     height: int,
     fps: Optional[int] = None,
+    enable_padding: bool = True,
     inference_probe: Optional[
         Callable[[Gst.Pad, Gst.PadProbeInfo, Tuple[Any, ...]], Gst.PadProbeReturn]
     ] = None,
@@ -25,7 +26,13 @@ def make_nvinferserver_bin(
         Gst.Bin.add(bin, caps)
         videorate.link(caps)
 
-    nvstreammux = make_element("nvstreammux", width=width, height=height, batch_size=1)
+    nvstreammux = make_element(
+        "nvstreammux",
+        width=width,
+        height=height,
+        batch_size=1,
+        enable_padding=enable_padding,
+    )
     Gst.Bin.add(bin, nvstreammux)
     if caps:
         caps.get_static_pad("src").link(nvstreammux.get_request_pad("sink_0"))
