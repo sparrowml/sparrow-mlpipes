@@ -3,8 +3,8 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "mlpipes"
-version = "0.2.0"
+name = "sparrow-mlpipes"
+version = "0.3.0"
 description = ""
 authors = ["jbencook <ben@sparrow.dev>"]
 license = "MIT"
