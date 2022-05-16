@@ -1,6 +1,6 @@
 import fire
 
-import mlpipes as mlp
+import sparrow_mlpipes as mlp
 
 PGIE_CLASS_ID_VEHICLE = 0
 PGIE_CLASS_ID_BICYCLE = 1

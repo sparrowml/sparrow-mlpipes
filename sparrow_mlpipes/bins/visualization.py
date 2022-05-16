@@ -1,7 +1,7 @@
 from typing import Any, Callable, Optional, Tuple
 
-from mlpipes.initialize import Gst
-from mlpipes.element import make_element
+from sparrow_mlpipes.element import make_element
+from sparrow_mlpipes.initialize import Gst
 
 
 def make_visualization_bin(

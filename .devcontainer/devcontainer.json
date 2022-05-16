@@ -1,0 +1,55 @@
+{
+    "name": "sparrow-mlpipes",
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "context": ".."
+    },
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        // pydocstyle
+        "python.linting.pydocstyleEnabled": true,
+        "python.linting.pydocstylePath": "/usr/local/bin/pydocstyle",
+        // black
+        "python.formatting.blackPath": "/usr/local/bin/black",
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        // isort
+        "python.sortImports.path": "/usr/local/bin/isort",
+        "[python]": {
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": true
+            }
+        },
+        // mypy
+        "python.linting.mypyEnabled": true,
+        "python.linting.mypyPath": "/usr/local/bin/mypy",
+        // pylint
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/usr/local/bin/pylint",
+        // pytest
+        "python.testing.pytestArgs": [
+            "sparrow_mlpipes"
+        ],
+        "python.testing.pytestEnabled": true,
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+    ],
+    "mounts": [
+        "source=projectname-bashhistory,target=/commandhistory,type=volume",
+        "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached,readonly",
+        "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached,readonly",
+        "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached,readonly",
+        "source=/data,target=/data,type=bind,consistency=cached",
+    ],
+    "workspaceFolder": "/code",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=cached",
+    "runArgs": [
+        "--ipc=host",
+        "--gpus=all",
+    ],
+    "postCreateCommand": "pip install -e .",
+}

@@ -1,10 +1,12 @@
 import sys
 from pathlib import Path
+from typing import no_type_check
 
-from mlpipes.initialize import Gst
-from mlpipes.element import make_element
+from sparrow_mlpipes.element import make_element
+from sparrow_mlpipes.initialize import Gst
 
 
+@no_type_check
 def on_pad_added(_, decoder_src_pad, data) -> None:
     caps = decoder_src_pad.get_current_caps()
     gst_struct = caps.get_structure(0)
@@ -23,6 +25,7 @@ def on_pad_added(_, decoder_src_pad, data) -> None:
             sys.stderr.write(" Error: Decodebin did not pick nvidia decoder plugin.\n")
 
 
+@no_type_check
 def on_child_added(_, obj, name, user_data) -> None:
     print(f"Decodebin child added: {name}")
     if name.find("decodebin") != -1:

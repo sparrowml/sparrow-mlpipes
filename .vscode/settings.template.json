@@ -1,3 +1,0 @@
-{
-    "docker.host": "ssh://{{ ssh_username }}@{{ ssh_ip }}"
-}

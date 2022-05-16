@@ -1,5 +1,5 @@
 import ctypes
-from typing import Generator, Tuple, Union
+from typing import Generator, Union, no_type_check
 
 import numpy as np
 import pyds
@@ -23,6 +23,7 @@ def get_object_meta(obj: pyds.GList) -> pyds.NvDsObjectMeta:
     return pyds.NvDsObjectMeta.cast(obj.data)
 
 
+@no_type_check
 def get_output_tensor(
     user_meta: pyds.NvDsUserMeta,
     layer_index: int,
