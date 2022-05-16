@@ -1,5 +1,5 @@
-from mlpipes.initialize import Gst
-from mlpipes.element import make_element
+from sparrow_mlpipes.element import make_element
+from sparrow_mlpipes.initialize import Gst
 
 
 def make_sink_bin(output_path: str) -> Gst.Bin:

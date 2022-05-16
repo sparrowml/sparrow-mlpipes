@@ -1,10 +1,10 @@
 from typing import Any, Callable, Optional, Tuple
 
-from mlpipes.initialize import Gst
-from mlpipes.element import make_element
+from sparrow_mlpipes.element import make_element
+from sparrow_mlpipes.initialize import Gst
 
 
-def make_nvinfer_bin(
+def make_nvinferserver_bin(
     config_path: str,
     width: int,
     height: int,
@@ -37,11 +37,11 @@ def make_nvinfer_bin(
     if caps:
         caps.get_static_pad("src").link(nvstreammux.get_request_pad("sink_0"))
 
-    nvinfer = make_element("nvinfer", config_file_path=config_path)
-    Gst.Bin.add(bin, nvinfer)
-    nvstreammux.link(nvinfer)
+    nvinferserver = make_element("nvinferserver", config_file_path=config_path)
+    Gst.Bin.add(bin, nvinferserver)
+    nvstreammux.link(nvinferserver)
     if inference_probe:
-        nvinfer.get_static_pad("src").add_probe(
+        nvinferserver.get_static_pad("src").add_probe(
             Gst.PadProbeType.BUFFER, inference_probe, 0
         )
 
@@ -49,6 +49,6 @@ def make_nvinfer_bin(
         bin.add_pad(Gst.GhostPad("sink", videorate.get_static_pad("sink")))
     else:
         bin.add_pad(Gst.GhostPad("sink", nvstreammux.get_request_pad("sink_0")))
-    bin.add_pad(Gst.GhostPad("src", nvinfer.get_static_pad("src")))
+    bin.add_pad(Gst.GhostPad("src", nvinferserver.get_static_pad("src")))
 
     return bin
