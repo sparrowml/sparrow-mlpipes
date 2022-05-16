@@ -1,5 +1,5 @@
-from .initialize import Gst, GLib
 from .exceptions import PipelineError
+from .initialize import GLib, Gst
 
 
 def bus_call(_, message: Gst.Message, loop: GLib.MainLoop):
