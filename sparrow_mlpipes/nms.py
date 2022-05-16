@@ -1,9 +1,12 @@
-from typing import List
-
 import numpy as np
+import numpy.typing as npt
 
 
-def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> np.ndarray:
+def nms(
+    boxes: npt.NDArray[np.float64],
+    scores: npt.NDArray[np.float64],
+    iou_threshold: float,
+) -> npt.NDArray[np.int64]:
     """
     Remove overlapping boxes with non-max suppression.
 
@@ -46,4 +49,4 @@ def nms(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> np.ndarr
         inds = np.where(ovr <= iou_threshold)[0]
         order = order[inds + 1]
 
-    return np.array(keep).astype(int)
+    return np.array(keep).astype(np.int64)
