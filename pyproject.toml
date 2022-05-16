@@ -10,6 +10,15 @@ authors = ["jbencook <ben@sparrow.dev>"]
 license = "MIT"
 packages = [{ include = "sparrow_mlpipes" }]
 
+[[tool.poetry.source]]
+url = "https://pypi.org/simple/"
+name = "public-pypi"
+
+[[tool.poetry.source]]
+url = "https://pypi.fury.io/sparrow/"
+name = "sparrow"
+secondary = true
+
 [tool.poetry.dependencies]
 python = ">= 3.8, <3.11"
 fire = "^0.4.0"
