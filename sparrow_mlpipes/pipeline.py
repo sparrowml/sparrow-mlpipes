@@ -1,8 +1,11 @@
+from typing import Any
+
 from .exceptions import PipelineError
 from .initialize import GLib, Gst
 
 
-def bus_call(_, message: Gst.Message, loop: GLib.MainLoop):
+def bus_call(_: Any, message: Gst.Message, loop: GLib.MainLoop) -> None:
+    """Handle bus messages."""
     if message.type == Gst.MessageType.EOS:
         loop.quit()
     elif message.type == Gst.MessageType.ERROR:
@@ -12,6 +15,7 @@ def bus_call(_, message: Gst.Message, loop: GLib.MainLoop):
 
 
 def run_pipeline(pipeline: Gst.Pipeline) -> None:
+    """Run a GStreamer pipeline."""
     loop = GLib.MainLoop()
     bus = pipeline.get_bus()
     bus.add_signal_watch()
