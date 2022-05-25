@@ -14,7 +14,7 @@ def make_nvinfer_bin(
         Callable[[Gst.Pad, Gst.PadProbeInfo, Tuple[Any, ...]], Gst.PadProbeReturn]
     ] = None,
 ) -> Gst.Bin:
-    bin = Gst.Bin.new("inference-server")
+    bin = Gst.Bin.new("inference")
     caps = None
     if fps:
         videorate = make_element("videorate")
