@@ -48,6 +48,7 @@ pytest-html = "^3.1.1"
 pytest-cov = "^3.0.0"
 jupyter = "^1.0.0"
 pre-commit = "^2.17.0"
+sparrow-datums = "^0.7.1"
 
 [tool.black]
 # https://github.com/psf/black

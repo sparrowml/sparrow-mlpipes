@@ -2,8 +2,7 @@ import time
 
 import fire
 import pyds
-from sparrow_datums import FrameAugmentedBoxes, PType
-from sparrow_datums.boxes.nms import non_max_suppression
+from sparrow_datums import FrameAugmentedBoxes, PType, non_max_suppression
 
 import sparrow_mlpipes as mlp
 
