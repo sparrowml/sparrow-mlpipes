@@ -167,18 +167,10 @@ def main(
     """Execute pipeline."""
     cap = cv2.VideoCapture(video_path)
     fps = round(cap.get(cv2.CAP_PROP_FPS))
-    image_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    image_height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    image_width = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    image_height = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     queue: mp.Queue[list[dict[str, float]] | None] = mp.Queue()
-    writer = ChunkStreamWriter(
-        "stream/manifest.jsonl",
-        AugmentedBoxTracking,
-        fps=fps,
-        start_time=0,
-        ptype=PType.absolute_tlwh.name,
-        image_width=image_width,
-        image_height=image_height,
-    )
+    writer = ChunkStreamWriter("stream/manifest.jsonl", AugmentedBoxTracking)
     writer_proc = mp.Process(
         target=chunk_writer_thread, args=(queue, writer, image_width, image_height, fps)
     )

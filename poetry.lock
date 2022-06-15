@@ -452,7 +452,7 @@ reference = "public-pypi"
 
 [[package]]
 name = "certifi"
-version = "2022.5.18.1"
+version = "2022.6.15"
 description = "Python package for providing Mozilla's CA Bundle."
 category = "main"
 optional = false
@@ -1300,7 +1300,7 @@ reference = "public-pypi"
 
 [[package]]
 name = "ipykernel"
-version = "6.14.0"
+version = "6.15.0"
 description = "IPython Kernel for Jupyter"
 category = "dev"
 optional = false
@@ -1315,6 +1315,7 @@ matplotlib-inline = ">=0.1"
 nest-asyncio = "*"
 packaging = "*"
 psutil = "*"
+pyzmq = ">=17"
 tornado = ">=6.1"
 traitlets = ">=5.1.0"
 
@@ -2919,7 +2920,7 @@ reference = "public-pypi"
 
 [[package]]
 name = "sparrow-datums"
-version = "0.8.1.dev1655297506"
+version = "0.8.1.dev1655313362"
 description = "A Python package for data structures"
 category = "dev"
 optional = false
@@ -3370,7 +3371,7 @@ reference = "public-pypi"
 [metadata]
 lock-version = "1.1"
 python-versions = ">= 3.8, <3.11"
-content-hash = "7824bfef319408b4abd0b910c99f5c6474ad3bdce1ada9e95a6f008b9adcb693"
+content-hash = "74e082ef76ecbbe6e0aa4a7074971ed8a2e0332d9fa90803f770dba3eb354dde"
 
 [metadata.files]
 aioboto3 = [
@@ -3579,8 +3580,8 @@ botocore = [
     {file = "botocore-1.24.21.tar.gz", hash = "sha256:7e976cfd0a61601e74624ef8f5246b40a01f2cce73a011ef29cf80a6e371d0fa"},
 ]
 certifi = [
-    {file = "certifi-2022.5.18.1-py3-none-any.whl", hash = "sha256:f1d53542ee8cbedbe2118b5686372fb33c297fcd6379b050cca0ef13a597382a"},
-    {file = "certifi-2022.5.18.1.tar.gz", hash = "sha256:9c5705e395cd70084351dd8ad5c41e65655e08ce46f2ec9cf6c2c08390f71eb7"},
+    {file = "certifi-2022.6.15-py3-none-any.whl", hash = "sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"},
+    {file = "certifi-2022.6.15.tar.gz", hash = "sha256:84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d"},
 ]
 cffi = [
     {file = "cffi-1.15.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:c2502a1a03b6312837279c8c1bd3ebedf6c12c4228ddbad40912d671ccc8a962"},
@@ -3960,8 +3961,8 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 ipykernel = [
-    {file = "ipykernel-6.14.0-py3-none-any.whl", hash = "sha256:cbf50ed3dc9998d4077d8cd263275f232cbe67dbd2e79cd6d2644f3a4418148b"},
-    {file = "ipykernel-6.14.0.tar.gz", hash = "sha256:720f2a07aadf70ca05b034f2cdd0590a8bd56581ddf3b7ec4a37075366270e89"},
+    {file = "ipykernel-6.15.0-py3-none-any.whl", hash = "sha256:b9ed519a29eb819eb82e87e0d3754088237b233e5c647b8bb0ff23c8c70ed16f"},
+    {file = "ipykernel-6.15.0.tar.gz", hash = "sha256:b59f9d9672c3a483494bb75915a2b315e78b833a38b039b1ee36dc28683f0d89"},
 ]
 ipython = [
     {file = "ipython-8.4.0-py3-none-any.whl", hash = "sha256:7ca74052a38fa25fe9bedf52da0be7d3fdd2fb027c3b778ea78dfe8c212937d1"},
@@ -4727,8 +4728,8 @@ soupsieve = [
     {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
 ]
 sparrow-datums = [
-    {file = "sparrow-datums-0.8.1.dev1655297506.tar.gz", hash = "md5:1726ef4704502c8f415d70067bcdab23"},
-    {file = "sparrow_datums-0.8.1.dev1655297506-py3-none-any.whl", hash = "md5:9be9bfc29c034be962bd2ff118bae416"},
+    {file = "sparrow-datums-0.8.1.dev1655313362.tar.gz", hash = "md5:025ff206e08ee5830dd8cfd3f7de6fc3"},
+    {file = "sparrow_datums-0.8.1.dev1655313362-py3-none-any.whl", hash = "md5:e423d3ba1f18f9a3e9106a14dd902d44"},
 ]
 stack-data = [
     {file = "stack_data-0.3.0-py3-none-any.whl", hash = "sha256:aa1d52d14d09c7a9a12bb740e6bdfffe0f5e8f4f9218d85e7c73a8c37f7ae38d"},
