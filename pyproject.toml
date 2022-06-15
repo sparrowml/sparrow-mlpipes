@@ -30,6 +30,7 @@ s3transfer = "0.5.2"
 dvc = {"extras" = ["s3"], version = "^2.10.2"}
 fire = "^0.4.0"
 numpy = "^1.21.4"
+scipy = "^1.8.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"
@@ -48,7 +49,8 @@ pytest-html = "^3.1.1"
 pytest-cov = "^3.0.0"
 jupyter = "^1.0.0"
 pre-commit = "^2.17.0"
-sparrow-datums = "^0.7.1"
+sparrow-datums = "^0.8.1"
+opencv-python = "^4.6.0"
 
 [tool.black]
 # https://github.com/psf/black
