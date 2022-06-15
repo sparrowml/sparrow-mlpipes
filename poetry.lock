@@ -2920,7 +2920,7 @@ reference = "public-pypi"
 
 [[package]]
 name = "sparrow-datums"
-version = "0.8.1.dev1655313362"
+version = "0.8.1"
 description = "A Python package for data structures"
 category = "dev"
 optional = false
@@ -3371,7 +3371,7 @@ reference = "public-pypi"
 [metadata]
 lock-version = "1.1"
 python-versions = ">= 3.8, <3.11"
-content-hash = "74e082ef76ecbbe6e0aa4a7074971ed8a2e0332d9fa90803f770dba3eb354dde"
+content-hash = "cf10ca67c94ef51693ed1ea2ca6a82cb37cec1039d1ee4b41d7f93dc188157e8"
 
 [metadata.files]
 aioboto3 = [
@@ -4728,8 +4728,8 @@ soupsieve = [
     {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
 ]
 sparrow-datums = [
-    {file = "sparrow-datums-0.8.1.dev1655313362.tar.gz", hash = "md5:025ff206e08ee5830dd8cfd3f7de6fc3"},
-    {file = "sparrow_datums-0.8.1.dev1655313362-py3-none-any.whl", hash = "md5:e423d3ba1f18f9a3e9106a14dd902d44"},
+    {file = "sparrow-datums-0.8.1.tar.gz", hash = "md5:bace3daf6c5c3f19da105923fedecdfd"},
+    {file = "sparrow_datums-0.8.1-py3-none-any.whl", hash = "md5:1bd2d81ef25ea573fcfefecb8757db65"},
 ]
 stack-data = [
     {file = "stack_data-0.3.0-py3-none-any.whl", hash = "sha256:aa1d52d14d09c7a9a12bb740e6bdfffe0f5e8f4f9218d85e7c73a8c37f7ae38d"},
