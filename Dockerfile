@@ -10,7 +10,7 @@ RUN apt install -y \
     python3-gi python3-dev python3-gst-1.0 python-gi-dev git python-dev \
     python3 python3-pip python3.8-dev python3.8-venv cmake g++ build-essential \
     libglib2.0-dev libglib2.0-dev-bin python-gi-dev libtool m4 autoconf automake \
-    openssh-client
+    openssh-client musl-dev libffi-dev
 
 RUN git config --global http.sslverify false
 
@@ -33,10 +33,7 @@ RUN cd deepstream_python_apps/bindings && \
 RUN rm /usr/bin/python /usr/local/bin/pip
 RUN ln -s /usr/bin/python3.8 /usr/local/bin/python
 RUN ln -s /usr/local/bin/pip3.8 /usr/local/bin/pip
-
-# Allow root for Jupyter notebooks
-RUN mkdir /root/.jupyter
-RUN echo "c.NotebookApp.allow_root = True" > /root/.jupyter/jupyter_notebook_config.py
+RUN pip install cryptography
 
 # Install Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | POETRY_HOME=/opt/poetry python && \
