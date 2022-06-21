@@ -1610,7 +1610,7 @@ python-versions = "*"
 
 [[package]]
 name = "sparrow-datums"
-version = "0.8.1.dev1655843288"
+version = "0.8.1"
 description = "A Python package for data structures"
 category = "dev"
 optional = false
@@ -1863,7 +1863,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">= 3.8, <3.11"
-content-hash = "db84766a943fdbee64c1dd70b1774315d53ed96ec3c707163d906ea8e82f8ed0"
+content-hash = "cc87b90a80be25118d79723fc0d467750cd09cc69dd603fa9f5484097c9b5219"
 
 [metadata.files]
 aioboto3 = [
@@ -2915,8 +2915,8 @@ snowballstemmer = [
     {file = "snowballstemmer-2.2.0.tar.gz", hash = "sha256:09b16deb8547d3412ad7b590689584cd0fe25ec8db3be37788be3810cbf19cb1"},
 ]
 sparrow-datums = [
-    {file = "sparrow-datums-0.8.1.dev1655843288.tar.gz", hash = "sha256:9f8e037189e1287987076dc72850579d6833e6ecadca63c33dbdd5768d37a6af"},
-    {file = "sparrow_datums-0.8.1.dev1655843288-py3-none-any.whl", hash = "sha256:bb8f207eeb03fa8e8bda6d41f885a12bd4c1ca522d898d8425c44be8635cd401"},
+    {file = "sparrow-datums-0.8.1.tar.gz", hash = "sha256:a1226bc2db3bdf47fce27473ee80b0bbaf17e14184be214954c09b364c3ccad7"},
+    {file = "sparrow_datums-0.8.1-py3-none-any.whl", hash = "sha256:c2a4c38bea254ab0a38b38822a729a3620168e54edecf52f49725f4d7359450a"},
 ]
 stack-data = [
     {file = "stack_data-0.3.0-py3-none-any.whl", hash = "sha256:aa1d52d14d09c7a9a12bb740e6bdfffe0f5e8f4f9218d85e7c73a8c37f7ae38d"},
