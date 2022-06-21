@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "sparrow-mlpipes"
-version = "0.4.0"
+version = "0.4.1"
 description = "Tools for Nvidia DeepStream"
 authors = ["jbencook <ben@sparrow.dev>"]
 license = "MIT"
