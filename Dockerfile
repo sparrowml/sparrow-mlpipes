@@ -33,6 +33,7 @@ RUN cd deepstream_python_apps/bindings && \
 RUN rm /usr/bin/python /usr/local/bin/pip
 RUN ln -s /usr/bin/python3.8 /usr/local/bin/python
 RUN ln -s /usr/local/bin/pip3.8 /usr/local/bin/pip
+RUN pip install --upgrade pip
 RUN pip install cryptography
 
 # Install Poetry
