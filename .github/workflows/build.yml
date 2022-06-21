@@ -41,7 +41,7 @@ jobs:
 
     - name: Publish package
       env:
-        POETRY_HTTP_BASIC_SPARROW_USERNAME: ${{ secrets.POETRY_HTTP_BASIC_SPARROW_USERNAME }}
-        POETRY_HTTP_BASIC_SPARROW_PASSWORD: ""
+        PYPI_USERNAME: __token__
+        PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         make publish
