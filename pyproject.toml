@@ -10,15 +10,6 @@ authors = ["jbencook <ben@sparrow.dev>"]
 license = "MIT"
 packages = [{ include = "sparrow_mlpipes" }]
 
-[[tool.poetry.source]]
-url = "https://pypi.org/simple/"
-name = "public-pypi"
-
-[[tool.poetry.source]]
-url = "https://pypi.fury.io/sparrow/"
-name = "sparrow"
-secondary = true
-
 [tool.poetry.dependencies]
 python = ">= 3.8, <3.11"
 aioboto3 = "9.5.0"
@@ -49,7 +40,7 @@ pytest-html = "^3.1.1"
 pytest-cov = "^3.0.0"
 jupyter = "^1.0.0"
 pre-commit = "^2.17.0"
-sparrow-datums = "^0.8.1"
+sparrow-datums = ">=0.8.1.dev"
 opencv-python = "^4.6.0"
 
 [tool.black]

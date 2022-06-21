@@ -59,4 +59,5 @@ endif
 
 .PHONY: publish
 publish: branchify
-	poetry publish --build --repository sparrow
+	poetry publish --build --username $(PYPI_USERNAME) --password $(PYPI_PASSWORD)
+	git checkout -- pyproject.toml
