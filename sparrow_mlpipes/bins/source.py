@@ -37,7 +37,11 @@ def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
     uridecodebin = make_element(
         "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
     )
+    # multifilesrcbin = make_element(
+    #     "multifilesrc", "multi-file-source", location="%03d.jpeg", index=0
+    # )
     Gst.Bin.add(bin, uridecodebin)
+    # Gst.Bin.add(bin, multifilesrcbin)
     uridecodebin.connect("pad-added", on_pad_added, bin)
     uridecodebin.connect("child-added", on_child_added, bin)
     bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
