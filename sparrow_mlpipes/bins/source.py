@@ -51,7 +51,5 @@ def make_source_bin(
             index=0,
         )
         Gst.Bin.add(bin, decodebin)
-        decodebin.connect("pad-added", on_pad_added, bin)
-        decodebin.connect("child-added", on_child_added, bin)
     bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
     return bin
