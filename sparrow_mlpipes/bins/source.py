@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from typing import no_type_check
+from typing import Optional, no_type_check
 
 from sparrow_mlpipes.element import make_element
 from sparrow_mlpipes.initialize import Gst
@@ -32,17 +32,23 @@ def on_child_added(_, obj, name, user_data) -> None:
         obj.connect("child-added", on_child_added, user_data)
 
 
-def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
+def make_source_bin(
+    input_uri: str, index: int = 0, video_source: Optional[bool] = True
+) -> Gst.Bin:
     bin = Gst.Bin.new(f"source-{index:02d}")
-    uridecodebin = make_element(
-        "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
-    )
-    # multifilesrcbin = make_element(
-    #     "multifilesrc", "multi-file-source", location="%03d.jpeg", index=0
-    # )
-    Gst.Bin.add(bin, uridecodebin)
-    # Gst.Bin.add(bin, multifilesrcbin)
-    uridecodebin.connect("pad-added", on_pad_added, bin)
-    uridecodebin.connect("child-added", on_child_added, bin)
+    if video_source == True:
+        uridecodebin = make_element(
+            "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
+        )
+        Gst.Bin.add(bin, uridecodebin)
+        uridecodebin.connect("pad-added", on_pad_added, bin)
+        uridecodebin.connect("child-added", on_child_added, bin)
+    else:
+        multifilesrcbin = make_element(
+            "multifilesrc", "multi-file-source", location="%03d.jpeg", index=0
+        )
+        Gst.Bin.add(bin, multifilesrcbin)
+        multifilesrcbin.connect("pad-added", on_pad_added, bin)
+        multifilesrcbin.connect("child-added", on_child_added, bin)
     bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
     return bin
