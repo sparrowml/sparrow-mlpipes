@@ -46,7 +46,9 @@ def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
         bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
     elif Path(input_uri).is_dir():
         multifilesrc = make_element(
-            "multifilesrc", location=Path(input_uri, "%d.jpeg"), start_index=0
+            "multifilesrc",
+            location=Path(input_uri, "%d.jpeg"),
+            start_index=0,
         )
         Gst.Bin.add(bin, multifilesrc)
 
@@ -57,28 +59,6 @@ def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
         nvjpegdec = make_element("nvjpegdec")
         Gst.Bin.add(nvjpegdec)
         jpegparse.link(nvjpegdec)
+        bin.add_pad(Gst.GhostPad("src", nvjpegdec.get_static_pad("src")))
 
     return bin
-
-
-# def make_source_bin(
-#     input_uri: str, index: int = 0, video_source: Optional[bool] = True
-# ) -> Gst.Bin:
-#     bin = Gst.Bin.new(f"source-{index:02d}")
-#     if video_source == True:
-#         uridecodebin = make_element(
-#             "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
-#         )
-#         Gst.Bin.add(bin, uridecodebin)
-#         uridecodebin.connect("pad-added", on_pad_added, bin)
-#         uridecodebin.connect("child-added", on_child_added, bin)
-#     else:
-#         decodebin = make_element(
-#             "multifilesrc",
-#             "multifilesrc",
-#             location=Path(input_uri, "%d.jpeg"),
-#             index=0,
-#         )
-#         Gst.Bin.add(bin, decodebin)
-#     bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
-#     return bin
