@@ -2,6 +2,8 @@ import sys
 from pathlib import Path
 from typing import Optional, no_type_check
 
+from fsutil import is_dir
+
 from sparrow_mlpipes.element import make_element
 from sparrow_mlpipes.initialize import Gst
 
@@ -32,24 +34,51 @@ def on_child_added(_, obj, name, user_data) -> None:
         obj.connect("child-added", on_child_added, user_data)
 
 
-def make_source_bin(
-    input_uri: str, index: int = 0, video_source: Optional[bool] = True
-) -> Gst.Bin:
+def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
     bin = Gst.Bin.new(f"source-{index:02d}")
-    if video_source == True:
+    if Path(input_uri).is_file():
         uridecodebin = make_element(
             "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
         )
         Gst.Bin.add(bin, uridecodebin)
         uridecodebin.connect("pad-added", on_pad_added, bin)
         uridecodebin.connect("child-added", on_child_added, bin)
-    else:
-        decodebin = make_element(
-            "multifilesrc",
-            "multifilesrc",
-            location=Path(input_uri, "%d.jpeg"),
-            index=0,
+        bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
+    elif Path(input_uri).is_dir():
+        multifilesrc = make_element(
+            "multifilesrc", location=Path(input_uri, "%d.jpeg"), start_index=0
         )
-        Gst.Bin.add(bin, decodebin)
-    bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
+        Gst.Bin.add(bin, multifilesrc)
+
+        jpegparse = make_element("jpegparse")
+        Gst.Bin.add(jpegparse)
+        multifilesrc.link(jpegparse)
+
+        nvjpegdec = make_element("nvjpegdec")
+        Gst.Bin.add(nvjpegdec)
+        jpegparse.link(nvjpegdec)
+
     return bin
+
+
+# def make_source_bin(
+#     input_uri: str, index: int = 0, video_source: Optional[bool] = True
+# ) -> Gst.Bin:
+#     bin = Gst.Bin.new(f"source-{index:02d}")
+#     if video_source == True:
+#         uridecodebin = make_element(
+#             "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
+#         )
+#         Gst.Bin.add(bin, uridecodebin)
+#         uridecodebin.connect("pad-added", on_pad_added, bin)
+#         uridecodebin.connect("child-added", on_child_added, bin)
+#     else:
+#         decodebin = make_element(
+#             "multifilesrc",
+#             "multifilesrc",
+#             location=Path(input_uri, "%d.jpeg"),
+#             index=0,
+#         )
+#         Gst.Bin.add(bin, decodebin)
+#     bin.add_pad(Gst.GhostPad.new_no_target("src", Gst.PadDirection.SRC))
+#     return bin
