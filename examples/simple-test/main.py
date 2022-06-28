@@ -17,7 +17,7 @@ def print_objects_pad(_, info, __):
     pyds.nvds_acquire_meta_lock(batch_meta)
     for frame in mlp.pyds_generator(batch_meta.frame_meta_list):
         frame_meta = mlp.get_frame_meta(frame)
-        print(frame_meta.frame_num)
+        # print(frame_meta.frame_num)
         for user in mlp.pyds_generator(frame_meta.frame_user_meta_list):
             user_meta = mlp.get_user_meta(user)
             augmented_boxes = mlp.get_output_tensor(user_meta, 0)
@@ -47,6 +47,7 @@ def print_objects_pad(_, info, __):
 def main(
     path: str,
     config_path: str = "./nvinfer.config",
+    output_path: str = "./out.mp4",
 ) -> None:
     """Get multifilesrc working."""
     pipeline = mlp.Gst.Pipeline()
@@ -87,9 +88,13 @@ def main(
     pipeline.add(visualization_bin)
     inference_bin.link(visualization_bin)
 
-    fakesink = mlp.make_element("fakesink")
-    pipeline.add(fakesink)
-    visualization_bin.link(fakesink)
+    sink_bin = mlp.make_sink_bin(output_path)
+    pipeline.add(sink_bin)
+    visualization_bin.link(sink_bin)
+
+    # fakesink = mlp.make_element("fakesink")
+    # pipeline.add(fakesink)
+    # visualization_bin.link(fakesink)
 
     print("Running pipeline...")
     mlp.run_pipeline(pipeline)
