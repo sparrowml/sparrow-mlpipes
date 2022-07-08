@@ -162,6 +162,7 @@ def make_detection_callback(
 def main(
     video_path: str,
     config_path: str = "./nvinferserver.pbtxt",
+    tracker_path: str = "./iou_tracker.yml",
     output_path: str = "./out.mp4",
 ) -> None:
     """Execute pipeline."""
@@ -189,7 +190,7 @@ def main(
     pipeline.add(inference_bin)
     source_bin.link(inference_bin)
 
-    tracking_bin = mlp.make_nvtracker_bin()
+    tracking_bin = mlp.make_nvtracker_bin(tracker_path)
     pipeline.add(tracking_bin)
     inference_bin.link(tracking_bin)
 
