@@ -14,25 +14,15 @@ test:
 #* Formatters/Linters
 .PHONY: codestyle
 codestyle:
-	poetry run pyupgrade --exit-zero-even-if-changed --py39-plus **/*.py
-	poetry run isort --settings-path pyproject.toml sparrow_mlpipes
-	poetry run black --config pyproject.toml sparrow_mlpipes
+	isort sparrow_mlpipes
+	black sparrow_mlpipes
 
 .PHONY: check-codestyle
 check-codestyle:
-	poetry run isort --diff --check-only sparrow_mlpipes
-	poetry run black --diff --check sparrow_mlpipes
-	poetry run pylint sparrow_mlpipes
+	isort --diff --check-only sparrow_mlpipes
+	black --diff --check sparrow_mlpipes
+	pylint sparrow_mlpipes
 
-.PHONY: mypy
-mypy:
-	poetry run mypy --config-file pyproject.toml sparrow_mlpipes
-
-.PHONY: check-safety
-check-safety:
-	poetry check
-	poetry run safety check --full-report
-	poetry run bandit -ll --recursive sparrow_mlpipes
 
 #* Docker
 # Example: make docker-build VERSION=latest
@@ -54,10 +44,14 @@ docker-remove:
 .PHONY: branchify
 branchify:
 ifneq ($(shell git rev-parse --abbrev-ref HEAD),main)
-	poetry version $(shell poetry version -s).dev$(shell date +%s)
+	sed -i "s/^version\s*=\s*[0-9]*\.[0-9]*\.[0-9]*/&.dev$(shell date +%s)/g" setup.cfg
 endif
 
 .PHONY: publish
 publish: branchify
-	poetry publish --build --username $(PYPI_USERNAME) --password $(PYPI_PASSWORD)
-	git checkout -- pyproject.toml
+	pip install twine
+	rm -rf dist
+	python -m build
+	twine upload dist/* --username $(PYPI_USERNAME) --password $(PYPI_PASSWORD)
+	git checkout -- setup.cfg
+	rm -rf dist
