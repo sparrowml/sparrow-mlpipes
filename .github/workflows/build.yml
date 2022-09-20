@@ -25,10 +25,6 @@ jobs:
       run: |
         make check-codestyle
 
-    - name: Run safety checks
-      run: |
-        make check-safety
-
     - name: Publish package
       env:
         PYPI_USERNAME: __token__
