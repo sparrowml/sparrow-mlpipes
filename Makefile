@@ -49,7 +49,7 @@ endif
 
 .PHONY: publish
 publish: branchify
-	pip install twine
+	pip install twine build
 	rm -rf dist
 	python -m build
 	twine upload dist/* --username $(PYPI_USERNAME) --password $(PYPI_PASSWORD)
