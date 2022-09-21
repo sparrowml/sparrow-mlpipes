@@ -1,3 +1,4 @@
+"""Get data from DeepStream buffers."""
 import ctypes
 from typing import Generator, Union
 
