@@ -63,7 +63,7 @@ def main(
     pipeline.add(visualization_bin)
     inference_bin.link(visualization_bin)
 
-    sink_bin = mlp.make_sink_bin(output_path)
+    sink_bin = mlp.make_sink_bin(output_path, bitrate_scale=0.00001)
     pipeline.add(sink_bin)
     visualization_bin.link(sink_bin)
 

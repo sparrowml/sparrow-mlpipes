@@ -1,8 +1,10 @@
+from typing import Optional
+
 from sparrow_mlpipes.element import make_element
 from sparrow_mlpipes.initialize import Gst
 
 
-def make_sink_bin(output_path: str) -> Gst.Bin:
+def make_sink_bin(output_path: str, bitrate_scale: Optional[float] = None) -> Gst.Bin:
     bin = Gst.Bin.new("sink")
 
     nvvideoconvert = make_element("nvvideoconvert")
@@ -14,7 +16,11 @@ def make_sink_bin(output_path: str) -> Gst.Bin:
     Gst.Bin.add(bin, capsfilter)
     nvvideoconvert.link(capsfilter)
 
-    avenc_mpeg4 = make_element("avenc_mpeg4", bitrate=2000000)
+    bitrate_kwargs = {}
+    if bitrate_scale is not None:
+        assert 0 < bitrate_scale <= 1
+        bitrate_kwargs["bitrate"] = round(bitrate_scale * 2147483647)
+    avenc_mpeg4 = make_element("avenc_mpeg4", **bitrate_kwargs)
     Gst.Bin.add(bin, avenc_mpeg4)
     capsfilter.link(avenc_mpeg4)
 
