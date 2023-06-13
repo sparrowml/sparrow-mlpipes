@@ -9,20 +9,13 @@ VERSION := latest
 
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov=sparrow_mlpipes sparrow_mlpipes/
-
-#* Formatters/Linters
-.PHONY: codestyle
-codestyle:
-	isort sparrow_mlpipes
-	black sparrow_mlpipes
+	pytest --cov=sparrow_mlpipes sparrow_mlpipes/
 
 .PHONY: check-codestyle
 check-codestyle:
 	isort --diff --check-only sparrow_mlpipes
 	black --diff --check sparrow_mlpipes
 	pylint sparrow_mlpipes
-
 
 #* Docker
 # Example: make docker-build VERSION=latest
