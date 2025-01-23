@@ -43,7 +43,7 @@
     },
     "mounts": [
         "source=projectname-bashhistory,target=/commandhistory,type=volume",
-        "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/ssh,type=bind,consistency=cached",
     ],
     "workspaceFolder": "/code",
     "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=cached",
@@ -52,5 +52,5 @@
         "--gpus=all",
         "--env-file=.devcontainer/.env"
     ],
-    "postCreateCommand": "pip install -r requirements-dev.txt && sudo chmod -R 777 /home/${localEnv:USER}/.ssh",
+    "postCreateCommand": "pip install -r requirements-dev.txt && mkdir -p /home/${localEnv:USER}/.ssh && sudo cp -r /home/${localEnv:USER}/ssh /home/${localEnv:USER}/.ssh",
 }
