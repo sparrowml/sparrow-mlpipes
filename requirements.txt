@@ -2,12 +2,4 @@
 #    uv pip compile -o requirements.txt setup.cfg
 numpy==1.24.4
     # via sparrow-mlpipes (setup.cfg)
-pgi==0.0.11.2
-    # via pyds
-pycairo==1.26.1
-    # via pygobject
-pyds @ https://github.com/NVIDIA-AI-IOT/deepstream_python_apps/releases/download/v1.1.6/pyds-1.1.6-py3-none-linux_x86_64.whl
-    # via sparrow-mlpipes (setup.cfg)
-pygobject==3.48.2
-    # via pyds
 -e .
