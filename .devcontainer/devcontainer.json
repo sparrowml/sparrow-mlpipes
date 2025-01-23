@@ -52,5 +52,5 @@
         "--gpus=all",
         "--env-file=.devcontainer/.env"
     ],
-    // "postCreateCommand": "pip install -r requirements-dev.txt",
+    "postCreateCommand": "pip install -r requirements-dev.txt && sudo chmod -R 777 /home/${localEnv:USER}/.ssh",
 }
