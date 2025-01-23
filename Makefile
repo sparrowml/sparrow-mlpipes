@@ -48,3 +48,10 @@ publish: branchify
 	twine upload dist/* --username $(PYPI_USERNAME) --password $(PYPI_PASSWORD)
 	git checkout -- setup.cfg
 	rm -rf dist
+
+.PHONY: freeze
+freeze:
+	uv pip compile -q -o requirements.txt setup.cfg
+	echo "-e ." >> requirements.txt
+	uv pip compile -q --extra dev -o requirements-dev.txt setup.cfg
+	echo "-e ." >> requirements-dev.txt

@@ -1,60 +1,49 @@
 {
     "name": "sparrow-mlpipes",
     "build": {
-        "dockerfile": "../Dockerfile",
-        "context": "..",
-        "args": {
-            "USER": "${localEnv:USER}"
-        }
+      "dockerfile": "../Dockerfile",
+      "context": "..",
+      "args": {
+        "USER": "${localEnv:USER}"
+      }
     },
-    "containerUser": "1000",
+    "containerUser": "1001",
     "customizations": {
-        "vscode": {
-            "settings": {
-                "python.pythonPath": "/usr/local/bin/python",
-                "python.languageServer": "Pylance",
-                "python.linting.enabled": true,
-                // pydocstyle
-                "python.linting.pydocstyleEnabled": true,
-                "python.linting.pydocstylePath": "/home/${localEnv:USER}/.local/bin/pydocstyle",
-                // black
-                "python.formatting.blackPath": "/home/${localEnv:USER}/.local/bin/black",
-                "python.formatting.provider": "black",
-                "[python]": {
-                    "editor.formatOnSave": true,
-                    "editor.codeActionsOnSave": {
-                        "source.organizeImports": true
-                    },
-                },
-                // isort
-                "isort.path": ["/home/${localEnv:USER}/.local/bin/isort"],
-                // pylint
-                "python.linting.pylintEnabled": true,
-                "python.linting.pylintPath": "/home/${localEnv:USER}/.local/bin/pylint",
-                // pytest
-                "python.testing.pytestArgs": [
-                    "sparrow_mlpipes"
-                ],
-                "python.testing.pytestEnabled": true,
+      "vscode": {
+        "settings": {
+          "python.pythonPath": "/usr/local/bin/python",
+          "python.languageServer": "Pylance",
+          "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter",
+            "editor.codeActionsOnSave": {
+              "source.organizeImports": true
             },
-            "extensions": [
-                "GitHub.copilot",
-                "ms-python.isort",
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-            ],            
-        }
+            "editor.formatOnSave": true
+          },
+          "isort.args": ["--profile", "black"],
+          // pytest
+          "python.testing.pytestArgs": ["sparrow_mlpipes"],
+          "python.testing.pytestEnabled": true
+        },
+        "extensions": [
+          "mechatroner.rainbow-csv",
+          "ms-python.black-formatter",
+          "ms-python.isort",
+          "ms-python.pylint",
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "ms-toolsai.jupyter"
+        ]
+      }
     },
     "mounts": [
-        "source=projectname-bashhistory,target=/commandhistory,type=volume",
-        "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached",
+      "source=projectname-bashhistory,target=/commandhistory,type=volume",
+      "source=${localEnv:HOME}/.aws,target=/home/${localEnv:USER}/aws,type=bind,consistency=cached",
+      "source=${localEnv:HOME}/.ssh,target=/home/${localEnv:USER}/ssh,type=bind,consistency=cached"
     ],
     "workspaceFolder": "/code",
     "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=cached",
-    "runArgs": [
-        "--ipc=host",
-        "--gpus=all",
-        "--env-file=.devcontainer/.env",
-    ],
-    "postCreateCommand": "pip install -e .[dev]",
-}
+    "runArgs": ["--ipc=host", "--gpus=all"],
+    "postCreateCommand": "USER=${localEnv:USER} bash ./.devcontainer/postCreateCommand.sh"
+  }
+  
