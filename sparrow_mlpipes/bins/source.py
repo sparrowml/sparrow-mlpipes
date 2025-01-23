@@ -34,9 +34,10 @@ def on_child_added(_, obj, name, user_data) -> None:
 
 def make_source_bin(input_uri: str, index: int = 0) -> Gst.Bin:
     bin = Gst.Bin.new(f"source-{index:02d}")
-    uridecodebin = make_element(
-        "uridecodebin", "uri-decode-bin", uri=f"file://{Path(input_uri).absolute()}"
-    )
+
+    if "://" not in input_uri:
+        input_uri = f"file://{Path(input_uri).absolute()}"
+    uridecodebin = make_element("uridecodebin", "uri-decode-bin", uri=input_uri)
     Gst.Bin.add(bin, uridecodebin)
     uridecodebin.connect("pad-added", on_pad_added, bin)
     uridecodebin.connect("child-added", on_child_added, bin)
